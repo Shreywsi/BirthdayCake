@@ -46,6 +46,11 @@ class BirthdayCake {
                     micInstruction.classList.add('hide');
                     setTimeout(() => { micInstruction.style.display = 'none'; }, 500);
                 }
+                // Show 'Make a wish!'
+                const makeAWish = document.getElementById('make-a-wish');
+                if (makeAWish) {
+                    setTimeout(() => { makeAWish.style.display = 'block'; }, 500);
+                }
                 this.startMicrophone();
             }
         }, { once: true });
@@ -291,6 +296,9 @@ class BirthdayCake {
     extinguishFlame() {
         this.flameExtinguished = true;
         this.flame.classList.add('extinguished');
+        // Hide 'Make a wish!' when the flame is extinguished
+        const makeAWish = document.getElementById('make-a-wish');
+        if (makeAWish) makeAWish.style.display = 'none';
         // Show puff of smoke effect
         const flameEffect = document.getElementById('flame-effect');
         if (flameEffect) {
@@ -303,6 +311,12 @@ class BirthdayCake {
         setTimeout(() => {
             this.flame.style.display = 'none';
         }, 600); // match animation duration
+        // Play happy birthday song
+        const hbdAudio = document.getElementById('hbd-audio');
+        if (hbdAudio) {
+            hbdAudio.currentTime = 0;
+            hbdAudio.play().catch(() => {});
+        }
         console.log('Flame extinguished! 🎉');
         // Trigger confetti celebration after a short delay
         setTimeout(() => {

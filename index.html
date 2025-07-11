@@ -11,8 +11,10 @@
         <div id="flame-feedback">
             <div id="flame-message"></div>
         </div>
-        <div id="mic-instruction" style="margin-bottom: 18px; color: #888; font-size: 1.1rem; text-align: center;">
-            Click anywhere to start
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; width: 100%; max-width: 540px; margin: 0 auto 0 auto; min-height: 40px;">
+            <div id="mic-instruction" style="margin-bottom: 0; color: #888; font-size: 1.1rem; text-align: left; position: relative; z-index: 10; flex: 1;">
+                Click anywhere to start
+            </div>
         </div>
         <!-- Birthday Cake -->
         <div class="cake-container">
@@ -27,20 +29,12 @@
             </div>
         </div>
         
-        <!-- Instructions -->
-        
-        <div class="instructions">
-            <h2> Blow out the candle! </h2>
-            <p>Click "Start Microphone" and blow gently to make the flame flicker, or blow harder to extinguish it!</p>
-            <button id="startMic" class="mic-button">🎤 Start Microphone</button>
-            <div id="micStatus" class="mic-status">Microphone: Disabled</div>
-        </div>
-        
         <!-- Confetti container -->
         <div id="confetti-container" class="confetti-container"></div>
         
         <!-- Audio visualization -->
         <canvas id="audioCanvas" class="audio-visualizer"></canvas>
+        <audio id="hbd-audio" src="hbd_song.mp3" preload="auto"></audio>
     </div>
     
     <script src="script.js"></script>
