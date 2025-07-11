@@ -46,10 +46,10 @@ class BirthdayCake {
                     micInstruction.classList.add('hide');
                     setTimeout(() => { micInstruction.style.display = 'none'; }, 500);
                 }
-                // Show 'Make a wish!'
-                const makeAWish = document.getElementById('make-a-wish');
-                if (makeAWish) {
-                    setTimeout(() => { makeAWish.style.display = 'block'; }, 500);
+                // Show pop notification
+                const popNotif = document.getElementById('pop-notif');
+                if (popNotif) {
+                    popNotif.style.display = 'block';
                 }
                 this.startMicrophone();
             }
@@ -296,6 +296,9 @@ class BirthdayCake {
     extinguishFlame() {
         this.flameExtinguished = true;
         this.flame.classList.add('extinguished');
+        // Hide pop notification
+        const popNotif = document.getElementById('pop-notif');
+        if (popNotif) popNotif.style.display = 'none';
         // Hide 'Make a wish!' when the flame is extinguished
         const makeAWish = document.getElementById('make-a-wish');
         if (makeAWish) makeAWish.style.display = 'none';
