@@ -291,6 +291,14 @@ class BirthdayCake {
     extinguishFlame() {
         this.flameExtinguished = true;
         this.flame.classList.add('extinguished');
+        // Show puff of smoke effect
+        const flameEffect = document.getElementById('flame-effect');
+        if (flameEffect) {
+            flameEffect.className = 'smoke';
+            setTimeout(() => {
+                flameEffect.className = '';
+            }, 850); // match animation duration
+        }
         // Hide the flame after the extinguish animation
         setTimeout(() => {
             this.flame.style.display = 'none';
