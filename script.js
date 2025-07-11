@@ -49,7 +49,8 @@ class BirthdayCake {
                 // Show pop notification
                 const popNotif = document.getElementById('pop-notif');
                 if (popNotif) {
-                    popNotif.style.display = 'block';
+                    popNotif.classList.remove('hide');
+                    popNotif.classList.add('show');
                 }
                 this.startMicrophone();
             }
@@ -296,9 +297,13 @@ class BirthdayCake {
     extinguishFlame() {
         this.flameExtinguished = true;
         this.flame.classList.add('extinguished');
-        // Hide pop notification
+        // Hide pop notification with animation
         const popNotif = document.getElementById('pop-notif');
-        if (popNotif) popNotif.style.display = 'none';
+        if (popNotif) {
+            popNotif.classList.remove('show');
+            popNotif.classList.add('hide');
+            setTimeout(() => { popNotif.style.display = 'none'; popNotif.classList.remove('hide'); }, 700);
+        }
         // Hide 'Make a wish!' when the flame is extinguished
         const makeAWish = document.getElementById('make-a-wish');
         if (makeAWish) makeAWish.style.display = 'none';
@@ -352,7 +357,7 @@ class BirthdayCake {
         }
         
         // Play celebration sound (if supported)
-        this.playCelebrationSound();
+        // this.playCelebrationSound(); // Removed playCelebrationSound
     }
     
     /**
@@ -378,48 +383,6 @@ class BirthdayCake {
                 confetti.parentNode.removeChild(confetti);
             }
         }, 3000);
-    }
-    
-    /**
-     * Play celebration sound using Web Audio API
-     */
-    playCelebrationSound() {
-        try {
-            if (!this.audioContext) return;
-            
-            // Create oscillator for celebration sound
-            const oscillator = this.audioContext.createOscillator();
-            const gainNode = this.audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(this.audioContext.destination);
-            
-            // Create a simple melody
-            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-            let currentNote = 0;
-            
-            const playNote = () => {
-                if (currentNote >= notes.length) return;
-                
-                oscillator.frequency.setValueAtTime(notes[currentNote], this.audioContext.currentTime);
-                gainNode.gain.setValueAtTime(0.1, this.audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.2);
-                
-                currentNote++;
-                setTimeout(playNote, 200);
-            };
-            
-            oscillator.start();
-            playNote();
-            
-            // Stop oscillator after melody
-            setTimeout(() => {
-                oscillator.stop();
-            }, 1000);
-            
-        } catch (error) {
-            console.log('Could not play celebration sound:', error);
-        }
     }
     
     /**
