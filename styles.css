@@ -1,0 +1,505 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('images/bg.jpg') center center/cover no-repeat fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 160px; /* Move the cake lower on the page */
+    min-height: 60px; /* Reserve space for instruction */
+}
+
+/* Cake image styling */
+.cake-img {
+    display: block;
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.cake-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Position the flame above the candle in the image */
+.flame-container {
+    position: absolute;
+    left: 52%; /* Adjust for new cake size */
+    top: 5px;   /* Adjust for new cake size */
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 36px;
+    height: 56px;
+    pointer-events: none;
+}
+
+.flame {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 38px;
+    background: radial-gradient(ellipse at center bottom, #ff6b6b 0%, #ff8e53 50%, #ffd700 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flameLiquid 1.4s cubic-bezier(0.4, 0.2, 0.6, 0.8) infinite alternate;
+    filter: drop-shadow(0 0 16px #ffd700);
+}
+
+.flame-inner {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(ellipse at center bottom, #fff 0%, #ffd700 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: innerFlameFlicker 0.15s ease-in-out infinite alternate;
+}
+
+.flame-core {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 12px;
+    background: #fff;
+    border-radius: 1px;
+    animation: coreFlicker 0.2s ease-in-out infinite alternate;
+}
+
+/* Flame Animations */
+@keyframes flameFlicker {
+    0% { 
+        transform: scale(1) rotate(-1deg);
+        box-shadow: 
+            0 0 20px #ff6b6b,
+            0 0 40px #ff8e53,
+            0 0 60px #ffd700;
+    }
+    100% { 
+        transform: scale(1.1) rotate(1deg);
+        box-shadow: 
+            0 0 25px #ff6b6b,
+            0 0 50px #ff8e53,
+            0 0 75px #ffd700;
+    }
+}
+
+@keyframes innerFlameFlicker {
+    0% { transform: translateX(-50%) scale(1); }
+    100% { transform: translateX(-50%) scale(1.2); }
+}
+
+@keyframes coreFlicker {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* Flame states for microphone input */
+.flame.blowing-gentle {
+    animation: gentleBlowFlow 0.5s ease-in-out infinite alternate;
+}
+
+.flame.blowing-hard {
+    animation: hardBlowFlow 0.3s ease-in-out infinite alternate;
+}
+
+.flame.extinguished {
+    animation: extinguish 0.5s ease-out forwards;
+}
+
+@keyframes gentleBlowFlow {
+    0% {
+        transform: translateX(-50%) scaleY(1) rotate(-8deg);
+        filter: brightness(1) drop-shadow(0 0 16px #ffd700);
+    }
+    100% {
+        transform: translateX(-80%) scaleY(1.15) rotate(-18deg);
+        filter: brightness(0.8) drop-shadow(0 0 10px #ffd700);
+    }
+}
+
+@keyframes hardBlowFlow {
+    0% {
+        transform: translateX(-50%) scaleY(1) rotate(-15deg) scaleX(1);
+        filter: brightness(1) drop-shadow(0 0 16px #ffd700);
+    }
+    100% {
+        transform: translateX(-120%) scaleY(0.7) rotate(-40deg) scaleX(1.3);
+        filter: brightness(0.5) drop-shadow(0 0 4px #ffd700);
+    }
+}
+
+@keyframes extinguish {
+    0% {
+        transform: translateX(-50%) scaleY(1) scaleX(1) rotate(-2deg);
+        opacity: 1;
+        filter: brightness(1) drop-shadow(0 0 16px #ffd700);
+    }
+    60% {
+        transform: translateX(-140%) scaleY(0.5) scaleX(1.5) rotate(-60deg);
+        opacity: 0.5;
+        filter: brightness(0.2) drop-shadow(0 0 2px #ffd700);
+    }
+    100% {
+        transform: translateX(-200%) scaleY(0.1) scaleX(2) rotate(-90deg);
+        opacity: 0;
+        filter: brightness(0) drop-shadow(0 0 0px #ffd700);
+    }
+}
+
+/* Instructions */
+.instructions {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    margin-top: 20px;
+}
+
+.instructions h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.instructions p {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.mic-button {
+    background: linear-gradient(145deg, #4ecdc4, #44a08d);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+
+.mic-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.mic-button:active {
+    transform: translateY(0);
+}
+
+.mic-button.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.mic-status {
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: bold;
+}
+
+.mic-status.active {
+    color: #4ecdc4;
+}
+
+/* Confetti */
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ffe66d, #a8e6cf, #ff8e53);
+    border-radius: 2px;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Audio Visualizer */
+.audio-visualizer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.audio-visualizer.active {
+    opacity: 1;
+}
+
+#flame-feedback {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 0 auto;
+    position: relative;
+    margin-top: 40px;
+}
+#flame-message {
+    flex: 1;
+    margin-top: 10px;
+    min-height: 28px;
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px #fff8, 0 0px 2px #ffd70088;
+    transition: opacity 0.2s;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#flame-message.active {
+    opacity: 1;
+}
+#intensity-bar-container {
+    width: 32px;
+    height: 180px;
+    margin-left: auto; /* This pushes the element to the far right within its flex parent */
+    margin-right: 20px; /* Add some space from the right edge */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+#intensity-bar-bg {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+}
+#intensity-bar {
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(0deg, #ffe66d 0%, #ff6b6b 100%);
+    border-radius: 16px;
+    transition: height 0.15s cubic-bezier(0.4,0.2,0.6,0.8);
+    box-shadow: 0 0 8px #ffd70099;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+@media (max-width: 768px) {
+    #intensity-bar-container {
+        height: 120px;
+        width: 22px;
+        margin-left: auto; /* Ensure it stays right-aligned on smaller screens too */
+        margin-right: 10px; /* Adjust spacing for smaller screens */
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cake-img {
+        max-width: 250px;
+    }
+    .cake-container {
+        max-width: 300px;
+    }
+    .flame-container {
+        width: 20px;
+        height: 28px;
+        top: 30px;
+    }
+    .flame {
+        width: 12px;
+        height: 20px;
+    }
+    .flame-inner {
+        width: 6px;
+        height: 12px;
+    }
+    .flame-core {
+        width: 2px;
+        height: 6px;
+    }
+    
+    .icing-bottom { width: 270px; height: 18px; bottom: 65px; }
+    .icing-middle { width: 220px; height: 13px; bottom: 130px; }
+    .icing-top { width: 170px; height: 10px; bottom: 180px; }
+    
+    .instructions {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .instructions h2 {
+        font-size: 1.5rem;
+    }
+    
+    .instructions p {
+        font-size: 1rem;
+    }
+    
+    .audio-visualizer {
+        width: 250px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cake-img {
+        max-width: 260px;
+    }
+    .cake-container {
+        max-width: 280px;
+    }
+    .flame-container {
+        width: 16px;
+        height: 24px;
+        left: 47.5%;
+        top: 32px;
+    }
+    .flame {
+        width: 10px;
+        height: 18px;
+    }
+    .flame-inner {
+        width: 5px;
+        height: 9px;
+        top: 3px;
+    }
+    .flame-core {
+        width: 2px;
+        height: 5px;
+        top: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cake-img {
+        max-width: 220px;
+    }
+    .cake-container {
+        max-width: 240px;
+    }
+    .flame-container {
+        width: 16px;
+        height: 24px;
+        left: 46%;
+        top: 8px;
+    }
+    .flame {
+        width: 10px;
+        height: 18px;
+    }
+    .flame-inner {
+        width: 5px;
+        height: 9px;
+        top: 3px;
+    }
+    .flame-core {
+        width: 2px;
+        height: 5px;
+        top: 6px;
+    }
+    
+    .icing-bottom { width: 220px; height: 15px; bottom: 55px; }
+    .icing-middle { width: 180px; height: 12px; bottom: 110px; }
+    .icing-top { width: 140px; height: 8px; bottom: 150px; }
+    
+    .audio-visualizer {
+        width: 200px;
+        height: 40px;
+    }
+}
+
+/* Loading animation */
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+} 
+
+#mic-instruction {
+    margin-bottom: 18px;
+    color: #888;
+    font-size: 1.1rem;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.4,0.2,0.6,0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+#mic-instruction.hide {
+    opacity: 0;
+    pointer-events: none;
+} 

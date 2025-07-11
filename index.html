@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Birthday Cake</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="flame-feedback">
+            <div id="flame-message"></div>
+        </div>
+        <div id="mic-instruction" style="margin-bottom: 18px; color: #888; font-size: 1.1rem; text-align: center;">
+            Click anywhere to start
+        </div>
+        <!-- Birthday Cake -->
+        <div class="cake-container">
+            <img src="cake.png" alt="Birthday Cake" class="cake-img" />
+            <!-- Candle flame overlay -->
+            <div class="flame-container" id="flame-container">
+                <div class="flame" id="flame">
+                    <div class="flame-inner"></div>
+                    <div class="flame-core"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Instructions -->
+        
+        <div class="instructions">
+            <h2> Blow out the candle! </h2>
+            <p>Click "Start Microphone" and blow gently to make the flame flicker, or blow harder to extinguish it!</p>
+            <button id="startMic" class="mic-button">🎤 Start Microphone</button>
+            <div id="micStatus" class="mic-status">Microphone: Disabled</div>
+        </div>
+        
+        <!-- Confetti container -->
+        <div id="confetti-container" class="confetti-container"></div>
+        
+        <!-- Audio visualization -->
+        <canvas id="audioCanvas" class="audio-visualizer"></canvas>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
