@@ -1,21 +1,7 @@
-# 🎂 Interactive Birthday Cake
+#  Interactive Birthday Cake
 
-A beautiful, interactive birthday cake web page that responds to microphone input! Blow gently to make the flame flicker, or blow harder to extinguish the candle and trigger a celebration.
+An interactive birthday cake web page that responds to microphone input! Blow gently to make the flame flicker, or blow harder to extinguish the candle and trigger a celebration.
 
-## ✨ Features
-
-- **Realistic 3D-looking birthday cake** with multiple layers and decorative sprinkles
-- **Interactive flame** that responds to microphone input
-- **Microphone integration** using Web Audio API for real-time audio analysis
-- **Three flame states**:
-  - Normal flickering (no input)
-  - Gentle flickering (soft blowing)
-  - Hard blowing animation (strong blowing)
-  - Complete extinguishing (sustained strong blowing)
-- **Celebratory confetti animation** when the candle is blown out
-- **Audio visualizer** showing real-time microphone input
-- **Responsive design** that works on desktop and mobile devices
-- **Beautiful gradients and lighting effects** for a dreamy, celebratory look
 
 ## 🚀 How to Use
 
